@@ -10,6 +10,13 @@
     <title>Gastos</title>
 </head>
 <body>
+    <?php
+    session_start();
+    if (!isset($_SESSION["correo"])) {
+        header("Location: ../../lib/login.php");
+        exit();
+    }
+    ?>
     <h1>Gastos</h1>
     <table>
         <thead>

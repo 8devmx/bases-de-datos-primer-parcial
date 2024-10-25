@@ -11,6 +11,13 @@ require_once '../../lib/db.php';
 </head>
 
 <body>
+  <?php
+  session_start();
+  if (!isset($_SESSION["correo"])) {
+      header("Location: ../../lib/login.php");
+      exit();
+  }
+  ?>
   <h1>Usuarios</h1>
   <table>
     <thead>
