@@ -5,47 +5,48 @@ require_once '../../lib/db.php';
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php include_once '../../lib/head.php'; ?>
   <title>Usuarios</title>
 </head>
 
-<body>
+<body class="d-flex flex-nowrap">
   <?php
   session_start();
   if (!isset($_SESSION["correo"])) {
-    header("Location: ../../lib/login.php");
+    header("Location: ../../index.php");
     exit();
   }
+  include_once '../../lib/sidebar.php';
   ?>
-  <p>Bienvenido <?php echo $_SESSION["nombre"]; ?></p>
-  <h1>Usuarios</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Teléfono</th>
-        <th>Correo</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-      $consulta = "SELECT * FROM usuarios";
-      $resultado = mysqli_query($enlace, $consulta);
-      while ($registro = mysqli_fetch_object($resultado)) {
-      ?>
+  <section class="p-3 w-100">
+    <h1>Usuarios</h1>
+    <table class="table table-striped table-hover">
+      <thead>
         <tr>
-          <td><?php echo $registro->id;  ?></td>
-          <td><?php echo $registro->nombre; ?></td>
-          <td><?php echo $registro->telefono; ?></td>
-          <td><?php echo $registro->correo; ?></td>
-          <td><?php echo $registro->status; ?></td>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Correo</th>
+          <th>Status</th>
         </tr>
-      <?php } ?>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <?php
+        $consulta = "SELECT * FROM usuarios";
+        $resultado = mysqli_query($enlace, $consulta);
+        while ($registro = mysqli_fetch_object($resultado)) {
+        ?>
+          <tr>
+            <td><?php echo $registro->id;  ?></td>
+            <td><?php echo $registro->nombre; ?></td>
+            <td><?php echo $registro->telefono; ?></td>
+            <td><?php echo $registro->correo; ?></td>
+            <td><?php echo $registro->status == 1 ? "✅" : "❌"; ?></td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </section>
 </body>
 
 </html>
