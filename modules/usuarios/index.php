@@ -13,16 +13,12 @@ require_once '../../lib/db.php';
 <body>
   <?php
   session_start();
-<<<<<<< Updated upstream
   if (!isset($_SESSION["correo"])) {
-      header("Location: ../../lib/login.php");
-      exit();
+    header("Location: ../../lib/login.php");
+    exit();
   }
   ?>
-=======
-  ?>
   <p>Bienvenido <?php echo $_SESSION["nombre"]; ?></p>
->>>>>>> Stashed changes
   <h1>Usuarios</h1>
   <table>
     <thead>
