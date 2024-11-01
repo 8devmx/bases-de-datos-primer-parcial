@@ -6,7 +6,7 @@ require_once '../../lib/db.php';
 
 <head>
     <?php include_once '../../lib/head.php'; ?>
-    <title>Añadir Usuarios</title>
+    <title>Usuarios</title>
 </head>
 
 <body class="d-flex flex-nowrap">
@@ -20,22 +20,28 @@ require_once '../../lib/db.php';
     ?>
     <section class="p-3 w-100">
         <h1>Usuarios</h1>
-        <form method="POST" action="../../lib/insertarUsuarios.php">
+        <form method="POST" action="../../lib/editarUsuarios.php">
+            <?php
+            $id = $_GET['id'];
+            $consulta = "SELECT * FROM usuarios WHERE id = $id";
+            $resultado = mysqli_query($enlace, $consulta);
+            $registro =  mysqli_fetch_object($resultado);
+            ?>
             <div class="form-group mb-3">
                 <label>Nombre:</label>
-                <input type="text" class="form-control" name="nombreUsuario" id="nombreUsuario">
+                <input type="text" value="<?php echo $registro->nombre; ?>" class="form-control" name="nombreUsuario" id="nombreUsuario">
             </div>
             <div class="form-group mb-3">
                 <label>Teléfono:</label>
-                <input type="tel" class="form-control" name="telefonoUsuario" id="telefonoUsuario">
+                <input type="text" value="<?php echo $registro->telefono; ?>" class="form-control" name="telefonoUsuario" id="telefonoUsuario">
             </div>
             <div class="form-group mb-3">
                 <label>Correo:</label>
-                <input type="email" class="form-control" name="correoUsuario" id="correoUsuario">
+                <input type="text" value="<?php echo $registro->correo; ?>" class="form-control" name="correoUsuario" id="correoUsuario">
             </div>
             <div class="form-group mb-3">
                 <label>Password:</label>
-                <input type="password" class="form-control" name="passwordUsuario" id="passwordUsuario">
+                <input type="password" value="<?php echo $registro->password; ?>" class="form-control" name="passwordUsuario" id="passwordUsuario">
             </div>
             <div class="form-group mb-3">
                 <label>Status:</label>
@@ -45,7 +51,8 @@ require_once '../../lib/db.php';
                 </select>
             </div>
             <div class="form-group mb-3">
-                <button type="submit" class="btn btn-success">Guardar</button>
+                <input type="hidden" value="<?php echo $id; ?>" class="form-control" name="id" id="id">
+                <button type="submit" class="btn btn-success">Editar</button>
             </div>
             <hr>
         </form>
