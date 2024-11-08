@@ -4,7 +4,7 @@
     mysqli_query($enlace, $consulta);
 
     extract($_POST);
-    $consulta = "INSERT IGNORE INTO usuarios (nombre, telefono, correo, password, status) VALUES ('$nombreUsuario','$telefonoUsuario','$correoUsuario','$passwordUsuario','$statusUsuario')";
+    $consulta = "UPDATE IGNORE usuarios SET nombre = '$nombreUsuario', telefono = '$telefonoUsuario', correo = '$correoUsuario', password = '$passwordUsuario', status = '$statusUsuario' WHERE id = '$idUsuario'";
     mysqli_query($enlace, $consulta);
     header("Location: ../modules/usuarios/index.php");
 ?>
