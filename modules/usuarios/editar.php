@@ -51,7 +51,7 @@ require_once '../../lib/db.php';
                 </select>
             </div>
             <div class="form-group mb-3">
-                <input type="hidden" value="<?php echo $id; ?>" class="form-control" name="id" id="id">
+                <input type="hidden" value="<?php echo $id; ?>" class="form-control" name="idUsuario" id="idUsuario">
                 <button type="submit" class="btn btn-success">Editar</button>
             </div>
             <hr>
