@@ -25,10 +25,6 @@
                 <input type="text" class="form-control" name="descripcionGastos" id="descripcionGastos">
             </div>
             <div class="form-group mb-3">
-                <label>Fecha:</label>
-                <input type="text" class="form-control" name="fechaGastos" id="fechaGastos">
-            </div>
-            <div class="form-group mb-3">
                 <label>Cantidad:</label>
                 <input type="text" class="form-control" name="cantidadGastos" id="cantidadGastos">
             </div>
@@ -52,4 +48,3 @@
     </section>
     </body>
     </html>
-    

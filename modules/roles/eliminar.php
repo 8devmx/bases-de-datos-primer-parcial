@@ -6,7 +6,7 @@ require_once '../../lib/db.php';
 
 <head>
   <?php include_once '../../lib/head.php'; ?>
-  <title>Usuarios</title>
+  <title>Roles</title>
 </head>
 
 <body class="d-flex flex-nowrap">
@@ -22,8 +22,8 @@ require_once '../../lib/db.php';
   <div class="alert alert-danger" role="alert">
     ¿Deseas eliminar el registro con id <?php echo $_GET['id'];?>?
   </div>
-  <a href="../../lib/eliminarUsuarios.php?id=<?php echo $_GET['id'];?>" class="btn btn-success">Si, eliminar</a>
-  <a href="../usuarios/index.php" class="btn btn-danger">No, conservar</a>
+  <a href="../../lib/eliminarRoles.php?id=<?php echo $_GET['id'];?>" class="btn btn-success">Si, eliminar</a>
+  <a href="../roles/index.php" class="btn btn-danger">No, conservar</a>
 </section>
 </body>
 

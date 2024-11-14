@@ -1,11 +1,9 @@
-<?php
-require_once 'db.php';
-$consulta = "ALTER TABLE tipos ADD UNIQUE (nombre)";
-mysqli_query($enlace, $consulta);
+<?php 
 
-extract($_POST);
-$consulta = "UPDATE IGNORE tipos SET nombre = '$nombreTipos' WHERE id = '$idTipos'";
-mysqli_query($enlace, $consulta);
-header("Location: ../modules/tipos/index.php");
+    require_once 'db.php';
 
+    extract($_POST);
+    $consulta = "UPDATE tipos SET nombre = '$nombreTipos', color = '$colorTipo', status = '$statusTipos' WHERE id = '$idTipos'";
+    mysqli_query($enlace, $consulta);
+    header("Location: ../modules/tipos/index.php");
 ?>

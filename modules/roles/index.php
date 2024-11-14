@@ -6,7 +6,7 @@ require_once '../../lib/db.php';
 
 <head>
   <?php include_once '../../lib/head.php'; ?>
-  <title>Usuarios</title>
+  <title>Roles</title>
 </head>
 
 <body class="d-flex flex-nowrap">
@@ -19,14 +19,14 @@ require_once '../../lib/db.php';
   include_once '../../lib/sidebar.php';
   ?>
   <section class="p-3 w-100">
-    <h1>Usuarios
+    <h1>Roles
       <a href="insertar.php" class="btn btn-success">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
         </svg>
       </a>
     </h1>
-    
+
     <div class="d-inline-flex flex-column align-items-start">                 
       <form method="GET" action="index.php" class="d-inline">
         <label for="orderSelect" class="form-label text-muted">Ordenar por nombre:</label> 
@@ -39,25 +39,21 @@ require_once '../../lib/db.php';
     </div>
     <div class="d-inline-flex flex-column align-items-start">
       <form method="GET" action="index.php" class="d-inline">
-        <label for="statusUsuarios" class="form-label text-muted">Filtrar por status:</label>
-        <select name="statusUsuarios" id="statusUsuarios" class="form-select w-auto" onchange="this.form.submit()">
+        <label for="statusRoles" class="form-label text-muted">Filtrar por status:</label>
+        <select name="statusRoles" id="statusRoles" class="form-select w-auto" onchange="this.form.submit()">
           <option value="" disabled selected>Selecciona una opción...</option>
           <option value="">Todos</option>
-          <option value="1" <?php if(isset($_GET['statusUsuarios']) && $_GET['statusUsuarios'] == '1') echo 'selected'; ?>>Activado</option>
-          <option value="0" <?php if(isset($_GET['statusUsuarios']) && $_GET['statusUsuarios'] == '0') echo 'selected'; ?>>Desactivado</option>
+          <option value="1" <?php if(isset($_GET['statusRoles']) && $_GET['statusRoles'] == '1') echo 'selected'; ?>>Activado</option>
+          <option value="0" <?php if(isset($_GET['statusRoles']) && $_GET['statusRoles'] == '0') echo 'selected'; ?>>Desactivado</option>
         </select>
       </form>
     </div>
-      
 
     <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>ID</th>
           <th>Nombre</th>
-          <th>Teléfono</th>
-          <th>Correo</th>
-          <th>Rol</th>
           <th>Fecha de creación</th>
           <th>Fecha de modificación</th>
           <th>Status</th>
@@ -65,27 +61,25 @@ require_once '../../lib/db.php';
         </tr>
       </thead>
       <tbody>
-      <?php
-        $order = 'ASC'; 
-        if (isset($_GET['order']) && ($_GET['order'] == 'ascendente' || $_GET['order'] == 'descendente')) {
-            $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
-        }
-        $status = isset($_GET['statusUsuarios']) ? $_GET['statusUsuarios'] : '';
-        $consulta = "SELECT u.id, u.nombre, u.telefono, u.correo, u.creacion, u.modificacion, u.status, r.nombre as rol FROM usuarios u JOIN roles r ON u.rol = r.id";
-        if ($status !== '') {
-            $consulta .= " WHERE u.status = '$status'";
-        }
-        $consulta .= " ORDER BY u.nombre $order";
-        $resultado = mysqli_query($enlace, $consulta);
-        while ($registro = mysqli_fetch_object($resultado)) {
-      ?>
-        
+        <?php
+            $order = 'ASC'; 
+            if (isset($_GET['order']) && ($_GET['order'] == 'ascendente' || $_GET['order'] == 'descendente')) {
+                $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
+            }
+            $status = isset($_GET['statusRoles']) ? $_GET['statusRoles'] : '';
+            $consulta = "SELECT * FROM roles";
+            if ($status !== '') {
+                $consulta .= " WHERE status = '$status'";
+            }
+            $consulta .= " ORDER BY nombre $order";
+            
+            $resultado = mysqli_query($enlace, $consulta);
+
+            while($registro = mysqli_fetch_object($resultado)){
+        ?>
           <tr>
             <td><?php echo $registro->id;  ?></td>
             <td><?php echo $registro->nombre; ?></td>
-            <td><?php echo $registro->telefono; ?></td>
-            <td><?php echo $registro->correo; ?></td>
-            <td><?php echo $registro->rol; ?></td>
             <td><?php echo $registro->creacion; ?></td>
             <td><?php echo $registro->modificacion; ?></td>
             <td><?php echo $registro->status == 1 ? "✅" : "❌"; ?></td>

@@ -44,6 +44,13 @@ require_once '../../lib/db.php';
                 <input type="password" value="<?php echo $registro->password; ?>" class="form-control" name="passwordUsuario" id="passwordUsuario">
             </div>
             <div class="form-group mb-3">
+                <label>Rol:</label>
+                <select name="rol" id="rol" class="form-control">
+                    <option value="1">Administrador</option>
+                    <option value="2">Usuario</option>
+                </select>
+            </div>
+            <div class="form-group mb-3">
                 <label>Status:</label>
                 <select name="statusUsuario" id="statusUsuario" class="form-control">
                     <option value="1">Activado</option>
