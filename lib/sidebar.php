@@ -2,7 +2,7 @@
 $current_page = $_SERVER['REQUEST_URI'];
 ?>
 
-<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;  ; ">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <span class="fs-4">Control de gastos</span>
     </a>
@@ -26,6 +26,11 @@ $current_page = $_SERVER['REQUEST_URI'];
       <li>
         <a href="../../modules/categorias/index.php" class="nav-link <?php echo strpos($current_page, 'categorias') !== false ? 'active' : 'text-white'; ?>">
           Categorías
+        </a>
+      </li>
+      <li>
+        <a href="../../modules/roles/index.php" class="nav-link <?php echo strpos($current_page, 'roles') !== false ? 'active' : 'text-white'; ?>">
+          Roles
         </a>
       </li>
     </ul>

@@ -26,33 +26,50 @@ require_once '../../lib/db.php';
                 </svg>
             </a>
         </h1>
+        <div class="d-inline-flex flex-column align-items-start">                 
+            <form method="GET" action="index.php" class="d-inline">
+                <label for="orderSelect" class="form-label text-muted">Ordenar por usuario:</label> 
+                <select name="order" id="orderSelect" class="form-select w-auto" onchange="this.form.submit()">             
+                    <option value="" disabled selected>Selecciona una opción...</option>             
+                    <option value="ascendente" <?php if (isset($_GET['order']) && $_GET['order'] === 'ascendente') echo 'selected'; ?>>Ascendente</option>             
+                    <option value="descendente" <?php if (isset($_GET['order']) && $_GET['order'] === 'descendente') echo 'selected'; ?>>Descendente</option>         
+                </select>
+            </form>
+        </div>
+        
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Descripción</th>
-                    <th>Fecha</th>
                     <th>Cantidad</th>
                     <th>Categoría</th>
                     <th>Tipo</th>
                     <th>Usuario</th>
+                    <th>Fecha de creación</th>
+                    <th>Fecha de modificación</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $consulta = "SELECT g.id, g.descripcion, g.fecha, g.cantidad, u.nombre as usuario, t.nombre as tipo, c.nombre as categoria FROM gastos g join usuarios u on g.usuario = u.id join tipos t on g.tipo = t.id join categorias c on g.categoria = c.id";
+                $order = 'ASC'; 
+                if (isset($_GET['order']) && ($_GET['order'] == 'ascendente' || $_GET['order'] == 'descendente')) {
+                    $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
+                }
+                $consulta = "SELECT g.id, g.descripcion, g.creacion, g.modificacion, g.cantidad, u.nombre as usuario, t.nombre as tipo, c.nombre as categoria FROM gastos g JOIN usuarios u ON g.usuario = u.id JOIN tipos t ON g.tipo = t.id JOIN categorias c ON g.categoria = c.id ORDER BY u.nombre $order";
                 $resultado = mysqli_query($enlace, $consulta);
                 while ($registro = mysqli_fetch_object($resultado)) {
                 ?>
                     <tr>
                         <td><?php echo $registro->id; ?></td>
                         <td><?php echo $registro->descripcion; ?></td>
-                        <td><?php echo $registro->fecha; ?></td>
                         <td><?php echo $registro->cantidad; ?></td>
                         <td><?php echo $registro->categoria; ?></td>
                         <td><?php echo $registro->tipo; ?></td>
                         <td><?php echo $registro->usuario; ?></td>
+                        <td><?php echo $registro->creacion; ?></td>
+                        <td><?php echo $registro->modificacion; ?></td>
                         <td>
                             <a href="editar.php?id=<?php echo $registro->id; ?>" class="btn btn-warning">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">

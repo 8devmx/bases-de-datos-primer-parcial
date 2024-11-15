@@ -1,6 +1,5 @@
-body,
-html {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  height: 100vh;
+body, html{
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    height: 100vh;
 }

@@ -18,6 +18,10 @@ require_once '../../lib/db.php';
     }
     include_once '../../lib/sidebar.php';
     ?>
+    <?php
+        date_default_timezone_set('America/Cancun');
+        $dateTimeNow = date("Y-m-d\TH:i"); 
+    ?>
     <section class="p-3 w-100">
         <h1>Usuarios</h1>
         <form method="POST" action="../../lib/insertarUsuarios.php">
@@ -36,6 +40,13 @@ require_once '../../lib/db.php';
             <div class="form-group mb-3">
                 <label>Password:</label>
                 <input type="password" class="form-control" name="passwordUsuario" id="passwordUsuario">
+            </div>
+            <div class="form-group mb-3">
+                <label>Rol:</label>
+                <select name="rol" id="rol" class="form-control">
+                    <option value="1">Administrador</option>
+                    <option value="2">Usuario</option>
+                </select>
             </div>
             <div class="form-group mb-3">
                 <label>Status:</label>

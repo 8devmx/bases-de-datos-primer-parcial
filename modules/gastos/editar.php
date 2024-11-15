@@ -22,17 +22,13 @@
         <form method="POST" action="../../lib/editarGastos.php">
             <?php
                 $id = $_GET['id'];
-                $consulta = "SELECT g.id, g.descripcion, g.fecha, g.cantidad, g.categoria as categoria_id, g.tipo as tipo_id, g.usuario as usuario_id, u.nombre as usuario_nombre, t.nombre as tipo_nombre, c.nombre as categoria_nombre FROM gastos g JOIN usuarios u ON g.usuario = u.id JOIN tipos t ON g.tipo = t.id JOIN categorias c ON g.categoria = c.id WHERE g.id = $id";
+                $consulta = "SELECT g.id, g.descripcion, g.creacion, g.modificacion, g.cantidad, g.categoria as categoria_id, g.tipo as tipo_id, g.usuario as usuario_id, u.nombre as usuario_nombre, t.nombre as tipo_nombre, c.nombre as categoria_nombre FROM gastos g JOIN usuarios u ON g.usuario = u.id JOIN tipos t ON g.tipo = t.id JOIN categorias c ON g.categoria = c.id WHERE g.id = $id";
                 $resultado = mysqli_query($enlace, $consulta);
                 $registro =  mysqli_fetch_object($resultado);
             ?>
             <div class="form-group mb-3">
                 <label>Descripción:</label>
                 <input type="text" value="<?php echo $registro->descripcion; ?>" class="form-control" name="descripcionGastos" id="descripcionGastos">
-            </div>
-            <div class="form-group mb-3">
-                <label>Fecha:</label>
-                <input type="text" value="<?php echo $registro->fecha; ?>" class="form-control" name="fechaGastos" id="fechaGastos">
             </div>
             <div class="form-group mb-3">
                 <label>Cantidad:</label>

@@ -1,14 +1,13 @@
 <?php
-require_once '../../lib/db.php';
+    require_once '../../lib/db.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <?php include_once '../../lib/head.php'; ?>
-    <title>Añadir Tipos</title>
+    <title>Tipos</title>
 </head>
-
 <body class="d-flex flex-nowrap">
     <?php
         session_start();
@@ -26,6 +25,17 @@ require_once '../../lib/db.php';
                 <input type="text" class="form-control" name="nombreTipos" id="nombreTipos">
             </div>
             <div class="form-group mb-3">
+                <label>Selecciona Un Color:</label><br>
+                <input type="color" name="colorTipo" value="#FFFFFF" style="min-width: 148px;">
+            </div>
+            <div class="form-group mb-3">
+                <label>Status:</label>
+                <select name="statusTipos" id="statusTipos" class="form-control">
+                    <option value="1">Activado</option>
+                    <option value="0">Desactivado</option>
+                </select>
+            </div>
+            <div class="form-group mb-3">
                 <button type="submit" class="btn btn-success">Guardar</button>
             </div>
             <hr>
@@ -33,4 +43,3 @@ require_once '../../lib/db.php';
     </section>
 </body>
 </html>
-<?php
