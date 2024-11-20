@@ -79,7 +79,7 @@
                     <tr>
                         <td><?php echo $registro->id; ?></td>
                         <td>
-                            <span style="display: inline-block; width: 10px; height: 10px; background-color: <?php echo $registro->color; ?>; border-radius: 50%; margin-right: 5px;"></span>
+                            <span style="display: inline-block; width: 10px; height: 10px; background-color: #<?php echo $registro->color; ?>; border-radius: 50%; margin-right: 5px;"></span>
                             <?php echo $registro->nombre; ?>
                         </td>
                         <td><?php echo $registro->creacion; ?></td>
