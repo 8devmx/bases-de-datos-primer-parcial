@@ -34,17 +34,47 @@
                 <label>Cantidad:</label>
                 <input type="text" value="<?php echo $registro->cantidad; ?>" class="form-control" name="cantidadGastos" id="cantidadGastos">
             </div>
+            <?php
+            $consultaCategoria = "SELECT id, nombre FROM categorias";
+            $resultadoCategoria = mysqli_query($enlace, $consultaCategoria);
+            ?>
             <div class="form-group mb-3">
                 <label>Categoría:</label>
-                <input type="text" value="<?php echo $registro->categoria_id; ?>" class="form-control" name="categoria" id="categoria">
+                <select name="categoria" id="categoriaUsuario" class="form-control">
+                    <?php
+                    while ($categoria = mysqli_fetch_object($resultadoCategoria)) {
+                        echo '<option value="' . $categoria->id . '" ' . ($categoria->id == $registro->categoria ? 'selected' : '') . '>' . $categoria->nombre . '</option>';
+                    }
+                    ?>
+                </select>
             </div>
+            <?php
+            $consultaTipo = "SELECT id, nombre FROM tipos";
+            $resultadoTipo = mysqli_query($enlace, $consultaTipo);
+            ?>
             <div class="form-group mb-3">
                 <label>Tipo:</label>
-                <input type="text" value="<?php echo $registro->tipo_id; ?>" class="form-control" name="tipo" id="tipo">
+                <select name="tipo" id="tipoGastos" class="form-control">
+                    <?php
+                    while ($tipo = mysqli_fetch_object($resultadoTipo)) {
+                        echo '<option value="' . $tipo->id . '" ' . ($tipo->id == $registro->tipo ? 'selected' : '') . '>' . $tipo->nombre . '</option>';
+                    }
+                    ?>
+                </select>
             </div>
+            <?php
+            $consultaUsuario = "SELECT id, nombre FROM usuarios";
+            $resultadoUsuario = mysqli_query($enlace, $consultaUsuario);
+            ?>
             <div class="form-group mb-3">
                 <label>Usuario:</label>
-                <input type="text" value="<?php echo $registro->usuario_id; ?>" class="form-control" name="usuario" id="usuario">
+                <select name="usuario" id="usuarioGastos" class="form-control">
+                    <?php
+                    while ($usuario = mysqli_fetch_object($resultadoUsuario)) {
+                        echo '<option value="' . $usuario->id . '" ' . ($usuario->id == $registro->usuario ? 'selected' : '') . '>' . $usuario->nombre . '</option>';
+                    }
+                    ?>
+                </select>
             </div>
             <div class="form-group mb-3">
                 <input type="hidden" value="<?php echo $id; ?>" class="form-control" name="idGastos" id="idGastos">

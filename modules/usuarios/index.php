@@ -16,6 +16,7 @@ require_once '../../lib/db.php';
     header("Location: ../../index.php");
     exit();
   }
+  
   include_once '../../lib/sidebar.php';
   ?>
   <section class="p-3 w-100">

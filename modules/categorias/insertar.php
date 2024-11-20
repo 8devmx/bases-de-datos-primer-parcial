@@ -28,6 +28,20 @@
                 <label>Selecciona Un Color:</label><br>
                 <input type="color" name="colorCategoria" value="#FFFFFF" style="min-width: 148px;">
             </div>
+            <?php
+            $consultaUsuario = "SELECT id, nombre FROM usuarios";
+            $resultadoUsuario = mysqli_query($enlace, $consultaUsuario);
+            ?>
+            <div class="form-group mb-3">
+                <label>Usuario:</label>
+                <select name="usuario" id="usuarioCategorias" class="form-control">
+                    <?php
+                    while ($usuario = mysqli_fetch_object($resultadoUsuario)) {
+                        echo '<option value="' . $usuario->id . '" ' . ($usuario->id == $registro->usuario ? 'selected' : '') . '>' . $usuario->nombre . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
             <div class="form-group mb-3">
                 <label>Status:</label>
                 <select name="statusCategorias" id="statusCategorias" class="form-control">
