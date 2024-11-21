@@ -57,19 +57,12 @@
                 </select>
             </div>
             <?php
-            $consultaUsuario = "SELECT id, nombre FROM usuarios";
-            $resultadoUsuario = mysqli_query($enlace, $consultaUsuario);
+                $correo = $_SESSION["correo"];
+                $consultaUsuario = "SELECT id FROM usuarios WHERE correo = '$correo'";
+                $resultadoUsuario = mysqli_query($enlace, $consultaUsuario);
+                $usuarioSesion = mysqli_fetch_assoc($resultadoUsuario);
             ?>
-            <div class="form-group mb-3">
-                <label>Usuario:</label>
-                <select name="usuario" id="usuarioGastos" class="form-control">
-                    <?php
-                    while ($usuario = mysqli_fetch_object($resultadoUsuario)) {
-                        echo '<option value="' . $usuario->id . '" ' . ($usuario->id == $registro->usuario ? 'selected' : '') . '>' . $usuario->nombre . '</option>';
-                    }
-                    ?>
-                </select>
-            </div>
+            <input type="hidden" name="usuario" value="<?php echo $usuarioSesion['id']; ?>">
             <div class="form-group mb-3">
                 <button type="submit" class="btn btn-success">Guardar</button>
             </div>
