@@ -30,14 +30,14 @@ require_once '../../lib/db.php';
         </svg>
       </a>
     </h1>
-    
-    <div class="d-inline-flex flex-column align-items-start">                 
+
+    <div class="d-inline-flex flex-column align-items-start">
       <form method="GET" action="index.php" class="d-inline">
-        <label for="orderSelect" class="form-label text-muted">Ordenar por nombre:</label> 
-        <select name="order" id="orderSelect" class="form-select w-auto" onchange="this.form.submit()">             
-          <option value="" disabled selected>Selecciona una opción...</option>             
-          <option value="ascendente" <?php if (isset($_GET['order']) && $_GET['order'] === 'ascendente') echo 'selected'; ?>>Ascendente</option>             
-          <option value="descendente" <?php if (isset($_GET['order']) && $_GET['order'] === 'descendente') echo 'selected'; ?>>Descendente</option>         
+        <label for="orderSelect" class="form-label text-muted">Ordenar por nombre:</label>
+        <select name="order" id="orderSelect" class="form-select w-auto" onchange="this.form.submit()">
+          <option value="" disabled selected>Selecciona una opción...</option>
+          <option value="ascendente" <?php if (isset($_GET['order']) && $_GET['order'] === 'ascendente') echo 'selected'; ?>>Ascendente</option>
+          <option value="descendente" <?php if (isset($_GET['order']) && $_GET['order'] === 'descendente') echo 'selected'; ?>>Descendente</option>
         </select>
       </form>
     </div>
@@ -47,12 +47,12 @@ require_once '../../lib/db.php';
         <select name="statusUsuarios" id="statusUsuarios" class="form-select w-auto" onchange="this.form.submit()">
           <option value="" disabled selected>Selecciona una opción...</option>
           <option value="">Todos</option>
-          <option value="1" <?php if(isset($_GET['statusUsuarios']) && $_GET['statusUsuarios'] == '1') echo 'selected'; ?>>Activado</option>
-          <option value="0" <?php if(isset($_GET['statusUsuarios']) && $_GET['statusUsuarios'] == '0') echo 'selected'; ?>>Desactivado</option>
+          <option value="1" <?php if (isset($_GET['statusUsuarios']) && $_GET['statusUsuarios'] == '1') echo 'selected'; ?>>Activado</option>
+          <option value="0" <?php if (isset($_GET['statusUsuarios']) && $_GET['statusUsuarios'] == '0') echo 'selected'; ?>>Desactivado</option>
         </select>
       </form>
     </div>
-      
+
 
     <table class="table table-striped table-hover">
       <thead>
@@ -69,25 +69,25 @@ require_once '../../lib/db.php';
         </tr>
       </thead>
       <tbody>
-      <?php
-        $order = 'ASC'; 
+        <?php
+        $order = 'ASC';
         if (isset($_GET['order']) && ($_GET['order'] == 'ascendente' || $_GET['order'] == 'descendente')) {
-            $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
+          $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
         }
         $status = isset($_GET['statusUsuarios']) ? $_GET['statusUsuarios'] : '';
         $consulta = "SELECT u.id, u.nombre, u.telefono, u.correo, u.creacion, u.modificacion, u.status, r.nombre as rol FROM usuarios u JOIN roles r ON u.rol = r.id";
         if ($status !== '') {
-            $consulta .= " WHERE u.status = '$status'";
+          $consulta .= " WHERE u.status = '$status'";
         }
         $consulta .= " ORDER BY u.nombre $order";
         $resultado = mysqli_query($enlace, $consulta);
         while ($registro = mysqli_fetch_object($resultado)) {
-      ?>
-        
+        ?>
+
           <tr>
             <td><?php echo $registro->id;  ?></td>
             <td><?php echo $registro->nombre; ?></td>
-            <td><?php echo $registro->telefonos; ?></td>
+            <td><?php echo $registro->telefono; ?></td>
             <td><?php echo $registro->correo; ?></td>
             <td><?php echo $registro->rol; ?></td>
             <td><?php echo $registro->creacion; ?></td>
