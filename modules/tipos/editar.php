@@ -32,8 +32,7 @@
             </div>
             <div class="form-group mb-3" id="color">
                 <label>Editar Color:</label><br>
-                <input type="color" name="colorTipo" value="<?php echo $registro->color; ?>" style="min-width: 90px;">
-            </div>
+                <input type="color" name="colorTipo" value="#<?php echo $registro->color; ?>" style="min-width: 90px;">            </div>
             <div class="form-group mb-3">
                 <label>Status:</label>
                 <select name="statusTipos" id="statusTipos" class="form-control">

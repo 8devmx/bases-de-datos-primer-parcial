@@ -32,7 +32,7 @@
             </div>
             <div class="form-group mb-3" id="color">
                 <label>Editar Color:</label><br>
-                <input type="color" name="colorCategoria" value="<?php echo $registro->color; ?>" style="min-width: 90px;">
+                <input type="color" name="colorCategoria" value="#<?php echo $registro->color; ?>" style="min-width: 90px;">
             </div>
             <?php
                 $correo = $_SESSION["correo"];

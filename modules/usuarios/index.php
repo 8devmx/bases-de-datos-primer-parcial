@@ -87,7 +87,7 @@ require_once '../../lib/db.php';
           <tr>
             <td><?php echo $registro->id;  ?></td>
             <td><?php echo $registro->nombre; ?></td>
-            <td><?php echo $registro->telefono; ?></td>
+            <td><?php echo $registro->telefonos; ?></td>
             <td><?php echo $registro->correo; ?></td>
             <td><?php echo $registro->rol; ?></td>
             <td><?php echo $registro->creacion; ?></td>

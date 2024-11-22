@@ -1,7 +1,8 @@
 <?php 
     require_once 'db.php';
     extract($_POST);
-    $consulta = "INSERT INTO tipos (nombre, color, status) VALUES ('$nombreTipos','$colorTipo','$statusTipos')";
+    $colorSinHash = ltrim($colorTipo, '#');
+    $consulta = "INSERT INTO tipos (nombre, color, status) VALUES ('$nombreTipos','$colorSinHash','$statusTipos')";
     mysqli_query($enlace, $consulta);
     header("Location: ../modules/tipos/index.php");
 ?>

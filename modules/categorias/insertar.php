@@ -26,7 +26,7 @@
             </div>
             <div class="form-group mb-3">
                 <label>Selecciona Un Color:</label><br>
-                <input type="color" name="colorCategoria" value="#FFFFFF" style="min-width: 148px;">
+                <input type="color" name="colorCategoria" value="FFFFFF" style="min-width: 148px;">
             </div>
             <?php
                 $correo = $_SESSION["correo"];
