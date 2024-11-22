@@ -1,10 +1,10 @@
 <?php
-    $servidor = "localhost";
-    $usuario = "root";
-    $password = "";
-    $db = "gastos";
+$servidor = "mysql-gastossistemas.alwaysdata.net";
+$usuario = "386482_";
+$password = "gastostercerparcial";
+$db = "gastossistemas_gastos";
 
-    $enlace = mysqli_connect($servidor, $usuario, $password, $db);
+$enlace = mysqli_connect($servidor, $usuario, $password, $db);
 
 if (!$enlace) {
     echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
@@ -12,4 +12,3 @@ if (!$enlace) {
     echo "error de depuración: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }
-?>
