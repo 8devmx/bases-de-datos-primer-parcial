@@ -41,11 +41,18 @@ require_once '../../lib/db.php';
                 <label>Password:</label>
                 <input type="password" class="form-control" name="passwordUsuario" id="passwordUsuario">
             </div>
+            <?php
+            $consultaRoles = "SELECT id, nombre FROM roles";
+            $resultadoRoles = mysqli_query($enlace, $consultaRoles);
+            ?>
             <div class="form-group mb-3">
                 <label>Rol:</label>
-                <select name="rol" id="rol" class="form-control">
-                    <option value="1">Administrador</option>
-                    <option value="2">Usuario</option>
+                <select name="rol" id="rolUsuario" class="form-control">
+                    <?php
+                    while ($rol = mysqli_fetch_object($resultadoRoles)) {
+                        echo '<option value="' . $rol->id . '" ' . ($rol->id == $registro->rol ? 'selected' : '') . '>' . $rol->nombre . '</option>';
+                    }
+                    ?>
                 </select>
             </div>
             <div class="form-group mb-3">

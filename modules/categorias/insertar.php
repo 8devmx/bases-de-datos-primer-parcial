@@ -28,6 +28,13 @@
                 <label>Selecciona Un Color:</label><br>
                 <input type="color" name="colorCategoria" value="#FFFFFF" style="min-width: 148px;">
             </div>
+            <?php
+                $correo = $_SESSION["correo"];
+                $consultaUsuario = "SELECT id FROM usuarios WHERE correo = '$correo'";
+                $resultadoUsuario = mysqli_query($enlace, $consultaUsuario);
+                $usuarioSesion = mysqli_fetch_assoc($resultadoUsuario);
+            ?>
+            <input type="hidden" name="usuario" value="<?php echo $usuarioSesion['id']; ?>">
             <div class="form-group mb-3">
                 <label>Status:</label>
                 <select name="statusCategorias" id="statusCategorias" class="form-control">

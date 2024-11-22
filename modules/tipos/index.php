@@ -15,6 +15,10 @@
         header("Location: ../../index.php");
         exit();
     }
+    if ($_SESSION['rol'] != 1) {
+        echo "Acceso denegado. No tienes permisos para esta página.";
+        exit();
+    }
     include_once '../../lib/sidebar.php';
 ?>
     <section class="p-3 w-100">

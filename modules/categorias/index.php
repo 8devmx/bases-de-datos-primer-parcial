@@ -15,6 +15,7 @@
         header("Location: ../../index.php");
         exit();
     }
+    $idUsuario = $_SESSION['id'];
     include_once '../../lib/sidebar.php';
     ?>
     <section class="p-3 w-100">
@@ -55,6 +56,7 @@
                     <th>Nombre</th> 
                     <th>Fecha de creación</th> 
                     <th>Fecha de modificación</th> 
+                    <th>Usuario</th> 
                     <th>Status</th> 
                     <th>Acciones</th> 
                 </tr>
@@ -66,11 +68,12 @@
                         $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
                     }
                     $status = isset($_GET['statusCategorias']) ? $_GET['statusCategorias'] : '';
-                    $consulta = "SELECT * FROM categorias";
+                    $consulta = "SELECT c.id, c.nombre, c.creacion, c.modificacion, c.status, c.color, u.nombre as usuario FROM categorias c JOIN usuarios u ON c.usuario = u.id WHERE c.usuario = $idUsuario";
                     if ($status !== '') {
-                        $consulta .= " WHERE status = '$status'";
+                        $consulta .= " AND c.status = '$status'";
                     }
-                    $consulta .= " ORDER BY nombre $order";
+                    
+                    $consulta .= " ORDER BY c.nombre $order";
                     
                     $resultado = mysqli_query($enlace, $consulta);
 
@@ -79,11 +82,12 @@
                     <tr>
                         <td><?php echo $registro->id; ?></td>
                         <td>
-                            <span style="display: inline-block; width: 10px; height: 10px; background-color: <?php echo $registro->color; ?>; border-radius: 50%; margin-right: 5px;"></span>
+                            <span style="display: inline-block; width: 10px; height: 10px; background-color: #<?php echo $registro->color; ?>; border-radius: 50%; margin-right: 5px;"></span>
                             <?php echo $registro->nombre; ?>
                         </td>
                         <td><?php echo $registro->creacion; ?></td>
                         <td><?php echo $registro->modificacion; ?></td>
+                        <td><?php echo $registro->usuario; ?></td>
                         <td><?php echo $registro->status == 1 ? "✅" : "❌"; ?></td>
                         <td>
                             <a href="editar.php?id=<?php echo $registro->id; ?>" class="btn btn-warning">
