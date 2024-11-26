@@ -22,7 +22,7 @@
         <form method="POST" action="../../lib/editarTipos.php">
             <?php
             $id = $_GET['id'];
-            $consulta = "SELECT * FROM tipos WHERE id = $id";
+            $consulta = "SELECT * FROM tipos WHERE id = $id AND status !=0";
             $resultado = mysqli_query($enlace, $consulta);
             $registro =  mysqli_fetch_object($resultado);
             ?>

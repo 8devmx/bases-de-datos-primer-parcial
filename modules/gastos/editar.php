@@ -35,7 +35,7 @@
                 <input type="text" value="<?php echo $registro->cantidad; ?>" class="form-control" name="cantidadGastos" id="cantidadGastos">
             </div>
             <?php
-            $consultaCategoria = "SELECT id, nombre FROM categorias";
+            $consultaCategoria = "SELECT id, nombre FROM categorias WHERE status !=0";
             $resultadoCategoria = mysqli_query($enlace, $consultaCategoria);
             ?>
             <div class="form-group mb-3">
@@ -49,7 +49,7 @@
                 </select>
             </div>
             <?php
-            $consultaTipo = "SELECT id, nombre FROM tipos";
+            $consultaTipo = "SELECT id, nombre FROM tipos WHERE status !=0";
             $resultadoTipo = mysqli_query($enlace, $consultaTipo);
             ?>
             <div class="form-group mb-3">

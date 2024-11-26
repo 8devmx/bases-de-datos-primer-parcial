@@ -70,7 +70,7 @@ require_once '../../lib/db.php';
             if (isset($_GET['order']) && ($_GET['order'] == 'ascendente' || $_GET['order'] == 'descendente')) {
                 $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
             }
-            $status = isset($_GET['statusRoles']) ? $_GET['statusRoles'] : '';
+            $status = isset($_GET['statusRoles']) ? $_GET['statusRoles'] :'';
             $consulta = "SELECT * FROM roles";
             if ($status !== '') {
                 $consulta .= " WHERE status = '$status'";
