@@ -42,7 +42,7 @@ require_once '../../lib/db.php';
                 <input type="password" class="form-control" name="passwordUsuario" id="passwordUsuario">
             </div>
             <?php
-            $consultaRoles = "SELECT id, nombre FROM roles";
+            $consultaRoles = "SELECT id, nombre FROM roles WHERE status !=0";
             $resultadoRoles = mysqli_query($enlace, $consultaRoles);
             ?>
             <div class="form-group mb-3">
