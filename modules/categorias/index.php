@@ -16,6 +16,7 @@
         exit();
     }
     $idUsuario = $_SESSION['id'];
+    $rolUsuario = $_SESSION['rol'];
     include_once '../../lib/sidebar.php';
     ?>
     <section class="p-3 w-100">
@@ -56,7 +57,9 @@
                     <th>Nombre</th> 
                     <th>Fecha de creación</th> 
                     <th>Fecha de modificación</th> 
-                    <th>Usuario</th> 
+                    <?php if ($rolUsuario != 2) { ?>
+                        <th>Usuario</th>
+                    <?php } ?>
                     <th>Status</th> 
                     <th>Acciones</th> 
                 </tr>
@@ -87,7 +90,9 @@
                         </td>
                         <td><?php echo $registro->creacion; ?></td>
                         <td><?php echo $registro->modificacion; ?></td>
-                        <td><?php echo $registro->usuario; ?></td>
+                        <?php if ($rolUsuario != 2) { ?>
+                            <td><?php echo $registro->usuario; ?></td>
+                        <?php } ?>
                         <td><?php echo $registro->status == 1 ? "✅" : "❌"; ?></td>
                         <td>
                             <a href="editar.php?id=<?php echo $registro->id; ?>" class="btn btn-warning">

@@ -15,6 +15,7 @@
             header("Location: ../../index.php");
             exit();
         }
+        $rolUsuario = $_SESSION['rol'];
         include_once '../../lib/sidebar.php';
     ?>
     <section class="p-3 w-100">
@@ -62,6 +63,21 @@
                     ?>
                 </select>
             </div>
+            <?php if ($rolUsuario != 2) { 
+            $consultaUsuario = "SELECT id, nombre FROM usuarios WHERE status !=0";
+            $resultadoUsuario = mysqli_query($enlace, $consultaUsuario);
+            ?>
+            <div class="form-group mb-3">
+                <label>Usuario:</label>
+                <select name="usuario" id="usuarioGastos" class="form-control">
+                    <?php
+                    while ($usuario_id = mysqli_fetch_object($resultadoUsuario)) {
+                        echo '<option value="' . $usuario_id->id . '" ' . ($usuario_id->id == $registro->usuario_id ? 'selected' : '') . '>' . $usuario_id->nombre . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <?php } else {?>
             <?php
                 $correo = $_SESSION["correo"];
                 $consultaUsuario = "SELECT id FROM usuarios WHERE correo = '$correo'";
@@ -69,6 +85,7 @@
                 $usuarioSesion = mysqli_fetch_assoc($resultadoUsuario);
             ?>
             <input type="hidden" name="usuario" value="<?php echo $usuarioSesion['id']; ?>">
+            <?php } ?>
             <div class="form-group mb-3">
                 <input type="hidden" value="<?php echo $id; ?>" class="form-control" name="idGastos" id="idGastos">
                 <button type="submit" class="btn btn-success">Editar</button>
