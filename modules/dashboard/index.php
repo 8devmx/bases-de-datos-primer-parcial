@@ -97,7 +97,7 @@ require_once '../../lib/db.php';
                     <div class="card text-bg-light mb-3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Total de ingresos</h5>
-                            <p class="card-text"><?php echo $totalIngresos; ?></p>
+                            <p class="card-text">$<?php echo number_format($totalIngresos, 2); ?></p>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ require_once '../../lib/db.php';
                     <div class="card text-bg-light mb-3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Total de gastos</h5>
-                            <p class="card-text"><?php echo $totalGastos; ?></p>
+                            <p class="card-text">$<?php echo number_format($totalGastos, 2); ?></p>
                         </div>
                     </div>
                 </div>
