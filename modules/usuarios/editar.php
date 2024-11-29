@@ -33,7 +33,7 @@ require_once '../../lib/db.php';
             </div>
             <div class="form-group mb-3">
                 <label>Teléfono:</label>
-                <input type="text" value="<?php echo $registro->telefono; ?>" class="form-control" name="telefonoUsuario" id="telefonoUsuario">
+                <input type="number" value="<?php echo $registro->telefono; ?>" class="form-control" name="telefonoUsuario" id="telefonoUsuario">
             </div>
             <div class="form-group mb-3">
                 <label>Correo:</label>

@@ -27,7 +27,7 @@
             </div>
             <div class="form-group mb-3">
                 <label>Cantidad:</label>
-                <input type="text" class="form-control" name="cantidadGastos" id="cantidadGastos">
+                <input type="number" class="form-control" name="cantidadGastos" id="cantidadGastos">
             </div>
             <?php
             $consultaCategoria = "SELECT id, nombre FROM categorias";
