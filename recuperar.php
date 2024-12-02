@@ -8,19 +8,14 @@
 
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <main class="form-signin w-100 m-auto">
-  <form method="POST" action="lib/login.php">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+  <form method="POST" action="lib/correo.php">
+    <h1 class="h3 mb-3 fw-normal">Introduce tu email</h1>
 
     <div class="form-floating">
       <input type="email" class="form-control" id="correo" placeholder="name@example.com" name="correo">
-      <label for="correo">Email address</label>
+      <label for="correo">Email address</label><br>
     </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-      <label for="floatingPassword">Password</label>
-    </div>
-    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-    <a href="recuperar.php">¿Olvidaste tu contraseña?</a>
+    <button class="btn btn-primary w-100 py-2" type="submit">Solicitar nip de recuperación</button>
     <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
   </form>
 </main>
