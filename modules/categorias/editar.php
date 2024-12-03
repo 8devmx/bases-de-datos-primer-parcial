@@ -15,6 +15,7 @@
             header("Location: ../../index.php");
             exit();
         }
+        $rolUsuario = $_SESSION['rol'];
         include_once '../../lib/sidebar.php';
     ?>
     <section class="p-3 w-100">

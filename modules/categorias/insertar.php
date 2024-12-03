@@ -15,6 +15,7 @@
             header("Location: ../../index.php");
             exit();
         }
+        $rolUsuario = $_SESSION['rol'];
         include_once '../../lib/sidebar.php';
     ?>
     <section class="p-3 w-100">
@@ -28,6 +29,21 @@
                 <label>Selecciona Un Color:</label><br>
                 <input type="color" name="colorCategoria" value="FFFFFF" style="min-width: 148px;">
             </div>
+            <?php if ($rolUsuario != 2) { 
+            $consultaUsuario = "SELECT id, nombre FROM usuarios WHERE status !=0";
+            $resultadoUsuario = mysqli_query($enlace, $consultaUsuario);
+            ?>
+            <div class="form-group mb-3">
+                <label>Usuario:</label>
+                <select name="usuario" id="usuarioCategorias" class="form-control">
+                    <?php
+                    while ($usuario = mysqli_fetch_object($resultadoUsuario)) {
+                        echo '<option value="' . $usuario->id . '" ' . ($usuario->id == $registro->usuario ? 'selected' : '') . '>' . $usuario->nombre . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <?php } else {?>
             <?php
                 $correo = $_SESSION["correo"];
                 $consultaUsuario = "SELECT id FROM usuarios WHERE correo = '$correo'";
@@ -35,6 +51,7 @@
                 $usuarioSesion = mysqli_fetch_assoc($resultadoUsuario);
             ?>
             <input type="hidden" name="usuario" value="<?php echo $usuarioSesion['id']; ?>">
+            <?php } ?>
             <div class="form-group mb-3">
                 <label>Status:</label>
                 <select name="statusCategorias" id="statusCategorias" class="form-control">

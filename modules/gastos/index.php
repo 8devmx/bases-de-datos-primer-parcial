@@ -17,6 +17,7 @@ require_once '../../lib/db.php';
         exit();
     }
     $idUsuario = $_SESSION['id'];
+    $rolUsuario = $_SESSION['rol'];
     include_once '../../lib/sidebar.php';
     ?>
     <section class="p-3 w-100">
@@ -46,7 +47,9 @@ require_once '../../lib/db.php';
                     <th>Cantidad</th>
                     <th>Categoría</th>
                     <th>Tipo</th>
-                    <th>Usuario</th>
+                    <?php if ($rolUsuario != 2) { ?>
+                        <th>Usuario</th>
+                    <?php } ?>
                     <th>Fecha de creación</th>
                     <th>Fecha de modificación</th>
                     <th>Acciones</th>
@@ -68,7 +71,9 @@ require_once '../../lib/db.php';
                         <td><?php echo $registro->cantidad; ?></td>
                         <td><?php echo $registro->categoria; ?></td>
                         <td><?php echo $registro->tipo; ?></td>
-                        <td><?php echo $registro->usuario; ?></td>
+                        <?php if ($rolUsuario != 2) { ?>
+                            <td><?php echo $registro->usuario; ?></td>
+                        <?php } ?>
                         <td><?php echo $registro->creacion; ?></td>
                         <td><?php echo $registro->modificacion; ?></td>
                         <td>
