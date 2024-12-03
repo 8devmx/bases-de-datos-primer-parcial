@@ -7,6 +7,7 @@ $modules = [
   "gastos" => ["text" => "Gastos", "permission" => 2],
   "categorias" => ["text" => "Categorías", "permission" => 2],
   "roles" => ["text" => "Roles", "permission" => 1],
+  "logs" => ["text" => "Logs", "permission" => 1]
   "dashboard" => ["text" => "Dashboard", "permission" => 2]
 ];
 ?>
