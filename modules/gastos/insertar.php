@@ -29,20 +29,41 @@
                 <label>Cantidad:</label>
                 <input type="number" class="form-control" name="cantidadGastos" id="cantidadGastos">
             </div>
-            <?php
-            $consultaCategoria = "SELECT id, nombre FROM categorias";
+            <?php if ($rolUsuario != 2) {
+            $consultaCategoria = "SELECT id, nombre FROM categorias WHERE status !=0";
             $resultadoCategoria = mysqli_query($enlace, $consultaCategoria);
             ?>
             <div class="form-group mb-3">
                 <label>Categoría:</label>
                 <select name="categoria" id="categoriaGastos" class="form-control">
                     <?php
-                    while ($categoria = mysqli_fetch_object($resultadoCategoria)) {
-                        echo '<option value="' . $categoria->id . '" ' . ($categoria->id == $registro->categoria ? 'selected' : '') . '>' . $categoria->nombre . '</option>';
+                    while ($categoria_id = mysqli_fetch_object($resultadoCategoria)) {
+                        echo '<option value="' . $categoria_id->id . '" ' . ($categoria_id->id == $registro->categoria_id ? 'selected' : '') . '>' . $categoria_id->nombre . '</option>';
                     }
                     ?>
                 </select>
             </div>
+            <?php } else {?>
+            <?php
+                $correo = $_SESSION["correo"];
+                $consultaUsuario = "SELECT id FROM usuarios WHERE correo = '$correo'";
+                $resultadoUsuario = mysqli_query($enlace, $consultaUsuario);
+                $usuarioSesion = mysqli_fetch_assoc($resultadoUsuario);
+                $usuario_id = $usuarioSesion['id'];
+                $consultaCategoria = "SELECT id, nombre FROM categorias WHERE usuario = $usuario_id AND status !=0";
+                $resultadoCategoria = mysqli_query($enlace, $consultaCategoria);
+            ?>
+            <div class="form-group mb-3">
+                <label>Categoría:</label>
+                <select name="categoria" id="categoriaGastos" class="form-control">
+                    <?php
+                    while ($categoria_id = mysqli_fetch_object($resultadoCategoria)) {
+                        echo '<option value="' . $categoria_id->id . '" ' . ($categoria_id->id == $registro->categoria_id ? 'selected' : '') . '>' . $categoria_id->nombre . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <?php } ?>
             <?php
             $consultaTipo = "SELECT id, nombre FROM tipos";
             $resultadoTipo = mysqli_query($enlace, $consultaTipo);

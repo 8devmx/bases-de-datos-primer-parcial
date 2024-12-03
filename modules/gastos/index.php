@@ -56,14 +56,18 @@ require_once '../../lib/db.php';
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $order = 'ASC'; 
-                if (isset($_GET['order']) && ($_GET['order'] == 'ascendente' || $_GET['order'] == 'descendente')) {
-                    $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
-                }
-                $consulta = "SELECT g.id, g.descripcion, g.creacion, g.modificacion, g.cantidad, u.nombre as usuario, t.nombre as tipo, c.nombre as categoria FROM gastos g JOIN usuarios u ON g.usuario = u.id JOIN tipos t ON g.tipo = t.id JOIN categorias c ON g.categoria = c.id WHERE g.usuario = $idUsuario ORDER BY u.nombre $order";
-                $resultado = mysqli_query($enlace, $consulta);
-                while ($registro = mysqli_fetch_object($resultado)) {
+            <?php
+                    $order = 'ASC'; 
+                    if (isset($_GET['order']) && ($_GET['order'] == 'ascendente' || $_GET['order'] == 'descendente')) {
+                        $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
+                    }
+                    if ($rolUsuario == 1) {
+                        $consulta = "SELECT g.id, g.descripcion, g.creacion, g.modificacion, g.cantidad, u.nombre AS usuario, t.nombre AS tipo, c.nombre AS categoria FROM gastos g JOIN usuarios u ON g.usuario = u.id JOIN tipos t ON g.tipo = t.id JOIN categorias c ON g.categoria = c.id ORDER BY u.nombre $order";
+                    } else {
+                        $consulta = "SELECT g.id, g.descripcion, g.creacion, g.modificacion, g.cantidad, u.nombre AS usuario, t.nombre AS tipo, c.nombre AS categoria FROM gastos g JOIN usuarios u ON g.usuario = u.id JOIN tipos t ON g.tipo = t.id JOIN categorias c ON g.categoria = c.id WHERE g.usuario = $idUsuario ORDER BY u.nombre $order";
+                    }
+                    $resultado = mysqli_query($enlace, $consulta);
+                    while ($registro = mysqli_fetch_object($resultado)) {
                 ?>
                     <tr>
                         <td><?php echo $registro->id; ?></td>

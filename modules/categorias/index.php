@@ -65,23 +65,27 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
+            <?php
                     $order = 'ASC'; 
                     if (isset($_GET['order']) && ($_GET['order'] == 'ascendente' || $_GET['order'] == 'descendente')) {
                         $order = $_GET['order'] === 'descendente' ? 'DESC' : 'ASC';
                     }
                     $status = isset($_GET['statusCategorias']) ? $_GET['statusCategorias'] : '';
-                    $consulta = "SELECT c.id, c.nombre, c.creacion, c.modificacion, c.status, c.color, u.nombre as usuario FROM categorias c JOIN usuarios u ON c.usuario = u.id WHERE c.usuario = $idUsuario";
-                    if ($status !== '') {
-                        $consulta .= " AND c.status = '$status'";
+                    $consulta = "SELECT c.id, c.nombre, c.creacion, c.modificacion, c.status, c.color, u.nombre as usuario FROM categorias c JOIN usuarios u ON c.usuario = u.id";
+                    if ($rolUsuario != 1) {
+                        $consulta .= " WHERE c.usuario = $idUsuario";
+                        if ($status !== '') {
+                            $consulta .= " AND c.status = '$status'";
+                        }
+                    } else if ($status !== '') {
+                        $consulta .= " WHERE c.status = '$status'";
                     }
-                    
                     $consulta .= " ORDER BY c.nombre $order";
                     
                     $resultado = mysqli_query($enlace, $consulta);
 
                     while($registro = mysqli_fetch_object($resultado)){
-                ?>
+                    ?>
                     <tr>
                         <td><?php echo $registro->id; ?></td>
                         <td>
