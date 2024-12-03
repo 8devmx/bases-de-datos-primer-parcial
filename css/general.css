@@ -3,3 +3,13 @@ body, html{
     min-height: -webkit-fill-available;
     height: 100vh;
 }
+
+body{
+    width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+body > section{
+    overflow-y: auto;
+}
